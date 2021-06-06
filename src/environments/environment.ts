@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  battutaAPIKey: '9957eb7ad5699bf197440858abd1ddc3'
 };
 
 /*
