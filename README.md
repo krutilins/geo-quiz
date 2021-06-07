@@ -1,5 +1,9 @@
 # GeoQuiz
 
+This project can be viewed by link https://dry-garden-31023.herokuapp.com/
+
+## Angular CLI
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
 ## Development server
