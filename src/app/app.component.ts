@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { map, take } from 'rxjs/operators'
+import { take } from 'rxjs/operators'
+import { contries } from 'src/assets/batuta-countries';
 import { BatutaCountry } from './models/batuta-country.model';
 import { Score } from './models/score.modle';
-import { CountryListService } from './services/country-list.service';
 import { LeaderboardService } from './services/leaderboard.service';
 import { RandomizerService } from './services/randomizer.service';
 import { ReverseGeocodingService } from './services/reverse-geocoding.service';
@@ -13,38 +13,28 @@ import { ScoreService } from './services/score.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   public center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   public options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     scrollwheel: false,
     disableDoubleClickZoom: true,
-    maxZoom: 70,
-    minZoom: 1,
-
+    maxZoom: 10,
+    minZoom: 1
   }
 
-
-  public countries: BatutaCountry[] = [];
+  public countries: BatutaCountry[] = [...contries];
   public selectedCountry: BatutaCountry | null = null;
 
   constructor(
-    private countryListService: CountryListService,
     private geocoding: ReverseGeocodingService,
     private scoreService: ScoreService,
     private randomizer: RandomizerService,
     private changeDetectorRef: ChangeDetectorRef,
     private leaderBoardService: LeaderboardService
   ) {
-    this.countryListService.getCountries().pipe(
-      take(1),
-      map(countries => {
-        this.countries = countries;
-        this.selectedCountry = this.selectNextCountry();
-        this.changeDetectorRef.detectChanges();
-      })
-    ).subscribe()
+    this.selectedCountry = this.selectNextCountry();
   }
 
 
