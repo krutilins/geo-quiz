@@ -32,8 +32,8 @@ export class ScoreService {
   }
 
   public resetScore(): void {
-    this.score.pointsEarned = 0;
-    this.score.attemptsLeft = 3;
+    this._score.pointsEarned = 0;
+    this._score.attemptsLeft = 3;
   }
 
 }

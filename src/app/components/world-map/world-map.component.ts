@@ -20,45 +20,55 @@ export class WorldMapComponent {
   constructor(
     private scoreService: ScoreService,
     private randomizer: RandomizerService,
-    private leaderBoardService: LeaderboardService
+    private leaderBoardService: LeaderboardService,
   ) {
-    this.countryToFind = this.selectNextCountry();
+    this.randomNextCountry();
   }
 
   public makeAttemptToFindCountry($event: MouseEvent) {
-
     const $element = $event.target as HTMLElement;
 
-    const countryCode = $element.id;
-    const countryName = $element.attributes.getNamedItem('title')?.value
+    const intendendCountry = {
+      name: $element.attributes.getNamedItem('title')?.value,
+      code: $element.id
+    }
 
-    if (countryCode && countryName) {
-      const intendendCountry = {
-        name: countryName,
-        code: countryCode
-      }
-
-
-      if (intendendCountry.code.toLowerCase() === this.countryToFind?.code.toLowerCase()) {
-        $element.classList.add('correct')
-        this.scoreService.incrementScore();
-        this.countryToFind = this.selectNextCountry();
+    if (intendendCountry.code && intendendCountry.name) {
+      if (this.isCorrectChoice(intendendCountry)) {
+        this.handleCorrectChoise($element);
       } else {
-        this.scoreService.decrementAttempt();
-        if (this.scoreService.score.attemptsLeft) {
-          $element.classList.add('incorrect')
-          this.countryToFind = this.selectNextCountry();
-        } else {
-
-          this.leaderBoardService.saveScore(this.scoreService.score);
-          this.scoreService.resetScore();
-          this.countries = [...contries];
-
-        }
+        this.handleIncorrectChoice($element);
       }
     }
   }
 
+  public isCorrectChoice(intendendCountry: BatutaCountry): boolean {
+    return intendendCountry.code.toLowerCase() === this.countryToFind?.code.toLowerCase();
+  }
+
+  public handleCorrectChoise($element: HTMLElement): void {
+    $element.classList.add('correct')
+    this.scoreService.incrementScore();
+    this.randomNextCountry();
+  }
+
+  public handleIncorrectChoice($element: HTMLElement): void {
+    this.scoreService.decrementAttempt();
+    if (this.scoreService.score.attemptsLeft) {
+      $element.classList.add('incorrect')
+      this.randomNextCountry();
+    } else {
+      this.clearSVGMap($element);
+      this.leaderBoardService.saveScore(this.scoreService.score);
+      this.scoreService.resetScore();
+      this.countries = [...contries];
+    }
+  }
+
+  public clearSVGMap($element: HTMLElement): void {
+    $element.parentElement?.querySelectorAll('.incorrect').forEach(elem => elem.classList.remove('incorrect'))
+    $element.parentElement?.querySelectorAll('.correct').forEach(elem => elem.classList.remove('correct'))
+  }
 
   public getCurrentScore(): Score {
     return this.scoreService.score;
@@ -68,12 +78,12 @@ export class WorldMapComponent {
     return this.countryToFind?.name || 'unselected';
   }
 
-  public selectNextCountry(): BatutaCountry {
+  public randomNextCountry(): void {
     if (this.countryToFind) {
       this.countries.filter(country => country.code !== this.countryToFind?.code)
     }
 
-    return this.countries[this.randomizer.getRandomInt(this.countries.length)]
+    this.countryToFind = this.countries[this.randomizer.getRandomInt(this.countries.length)]
   }
 
   public points(): number {

@@ -1,4 +1,4 @@
 export interface BatutaCountry {
-  name: string;
+  name?: string;
   code: string;
 }
