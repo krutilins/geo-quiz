@@ -1,11 +1,17 @@
 :host {
   display: block;
-  width: 100%;
   background-color: rgba(0, 0, 255, 0.1);
 }
 
 .container {
-  width: 70%;
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 25px;
+}
+
+.map {
+  width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 25px;

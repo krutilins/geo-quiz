@@ -1,18 +1,5 @@
 <app-nickname-updater class="container"></app-nickname-updater>
-<app-game-toolbar
-  class="container"
-  [currentScore]="getCurrentScore()"
-  [countryToFind]="counntryToFind()"
-></app-game-toolbar>
 
-<div class="container">
-  <google-map
-    height="500px"
-    width="100%"
-    [center]="center"
-    [options]="options"
-    (mapClick)="makeAttemptToFindCountry($event)"
-  ></google-map>
-</div>
+<app-world-map class="map"></app-world-map>
 
 <app-leaderboard class="container" [scores]="getLeaders()"></app-leaderboard>
