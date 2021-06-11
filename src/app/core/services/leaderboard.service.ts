@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Score } from '../models/score.modle';
+import { Score } from '../models/score.model';
 
 @Injectable({
   providedIn: 'root'

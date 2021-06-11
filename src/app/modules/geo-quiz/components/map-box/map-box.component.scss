@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.scaling-svg-container {
+  position: relative;
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  padding-bottom: 100%;
+}
+
+.scaling-svg {
+  position: absolute;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+}
+
+path {
+  fill: #c935dc;
+  stroke: white;
+  stroke-width: 0.2px;
+  stroke-linejoin: round;
+
+  &:hover {
+    fill: white;
+    stroke: black;
+  }
+
+  &.correct {
+    fill: green;
+  }
+
+  &.incorrect {
+    fill: #dc3545;
+  }
+}

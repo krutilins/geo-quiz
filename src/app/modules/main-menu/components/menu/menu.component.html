@@ -1,0 +1,27 @@
+<div class="container menu">
+  <div class="menu-header">
+    <h1 class="menu-title">Geo-Quiz</h1>
+  </div>
+  <div class="menu-content">
+    <div class="menu-item">
+      <input
+        class="input"
+        placeholder="Type nickname..."
+        [(ngModel)]="nickname"
+        (change)="updateNickname()"
+      />
+    </div>
+
+    <!-- <button class="button" [disabled]="!nickname" (click)="startGame()">
+      start
+    </button> -->
+
+    <div class="menu-item">
+      <div class="button" (click)="startGame()">
+        <span class="button__mask"></span>
+        <span class="button__text">start</span>
+        <span class="button__text button__text--bis">start</span>
+      </div>
+    </div>
+  </div>
+</div>

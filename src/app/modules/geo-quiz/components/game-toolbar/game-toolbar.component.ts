@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Score } from 'src/app/models/score.modle';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Score } from 'src/app/core/models/score.model';
 
 @Component({
   selector: 'app-game-toolbar',

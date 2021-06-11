@@ -1,0 +1,26 @@
+<h1>Score Board</h1>
+<div
+  class="tbl-header"
+  [style]="{ 'padding-right': tableContent.offsetWidth - table.offsetWidth }"
+>
+  <table>
+    <thead>
+      <tr>
+        <th>Nickname</th>
+        <th>Points</th>
+        <th>Hearts</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="tbl-content" #tableContent>
+  <table cellpadding="0" cellspacing="0" border="0" #table>
+    <tbody>
+      <tr *ngFor="let score of scores">
+        <td>{{ score.nickname }}</td>
+        <td>{{ score.pointsEarned }}</td>
+        <td>{{ score.attemptsLeft }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

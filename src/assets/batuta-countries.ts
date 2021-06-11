@@ -1,4 +1,4 @@
-import { BatutaCountry } from "src/app/models/batuta-country.model";
+import { BatutaCountry } from "src/app/core/models/batuta-country.model";
 
 export const contries: BatutaCountry[] = [
   {

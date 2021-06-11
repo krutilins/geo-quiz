@@ -1,0 +1,7 @@
+<app-game-toolbar
+  class="container"
+  [currentScore]="getCurrentScore()"
+  [countryToFind]="counntryToFind()"
+></app-game-toolbar>
+
+<app-map-box (click)="makeAttemptToFindCountry($event)"></app-map-box>

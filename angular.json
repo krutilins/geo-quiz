@@ -8,6 +8,12 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss",
+          "displayBlock": true,
+          "changeDetection": "OnPush",
+          "skipTests": true
         }
       },
       "root": "",

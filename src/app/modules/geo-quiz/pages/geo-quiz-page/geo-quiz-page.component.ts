@@ -1,18 +1,19 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { BatutaCountry } from 'src/app/models/batuta-country.model';
-import { Score } from 'src/app/models/score.modle';
-import { LeaderboardService } from 'src/app/services/leaderboard.service';
-import { RandomizerService } from 'src/app/services/randomizer.service';
-import { ScoreService } from 'src/app/services/score.service';
+import { BatutaCountry } from 'src/app/core/models/batuta-country.model';
+import { Score } from 'src/app/core/models/score.model';
+import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
+import { RandomizerService } from 'src/app/core/services/randomizer.service';
+import { ScoreService } from 'src/app/core/services/score.service';
 import { contries } from 'src/assets/batuta-countries';
 
 @Component({
-  selector: 'app-world-map',
-  templateUrl: './world-map.component.html',
-  styleUrls: ['./world-map.component.scss'],
+  selector: 'app-geo-quiz-page',
+  templateUrl: './geo-quiz-page.component.html',
+  styleUrls: ['./geo-quiz-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorldMapComponent {
+export class GeoQuizPageComponent {
+
 
   public countries: BatutaCountry[] = [...contries];
   public countryToFind: BatutaCountry | null = null;
@@ -35,7 +36,7 @@ export class WorldMapComponent {
 
     if (intendendCountry.code && intendendCountry.name) {
       if (this.isCorrectChoice(intendendCountry)) {
-        this.handleCorrectChoise($element);
+        this.handleCorrectChoice($element);
       } else {
         this.handleIncorrectChoice($element);
       }
@@ -46,7 +47,7 @@ export class WorldMapComponent {
     return intendendCountry.code.toLowerCase() === this.countryToFind?.code.toLowerCase();
   }
 
-  public handleCorrectChoise($element: HTMLElement): void {
+  public handleCorrectChoice($element: HTMLElement): void {
     $element.classList.add('correct')
     this.scoreService.incrementScore();
     this.randomNextCountry();
