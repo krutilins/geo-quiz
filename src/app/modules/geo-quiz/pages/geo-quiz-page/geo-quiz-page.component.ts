@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { BatutaCountry } from 'src/app/core/models/batuta-country.model';
+import { Router } from '@angular/router';
+import { Country } from 'src/app/core/models/country.model';
 import { Score } from 'src/app/core/models/score.model';
 import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
-import { RandomizerService } from 'src/app/core/services/randomizer.service';
+import { RandomService } from 'src/app/core/services/random.service';
 import { ScoreService } from 'src/app/core/services/score.service';
 import { contries } from 'src/assets/batuta-countries';
 
@@ -15,13 +16,14 @@ import { contries } from 'src/assets/batuta-countries';
 export class GeoQuizPageComponent {
 
 
-  public countries: BatutaCountry[] = [...contries];
-  public countryToFind: BatutaCountry | null = null;
+  public countries: Country[] = [...contries];
+  public countryToFind: Country | null = null;
 
   constructor(
     private scoreService: ScoreService,
-    private randomizer: RandomizerService,
+    private randomizer: RandomService,
     private leaderBoardService: LeaderboardService,
+    private router: Router
   ) {
     this.randomNextCountry();
   }
@@ -43,7 +45,7 @@ export class GeoQuizPageComponent {
     }
   }
 
-  public isCorrectChoice(intendendCountry: BatutaCountry): boolean {
+  public isCorrectChoice(intendendCountry: Country): boolean {
     return intendendCountry.code.toLowerCase() === this.countryToFind?.code.toLowerCase();
   }
 
@@ -59,10 +61,15 @@ export class GeoQuizPageComponent {
       $element.classList.add('incorrect')
       this.randomNextCountry();
     } else {
-      this.clearSVGMap($element);
-      this.leaderBoardService.saveScore(this.scoreService.score);
-      this.scoreService.resetScore();
-      this.countries = [...contries];
+      if (confirm('You have no more attempts. Do you want to start over?')) {
+        this.clearSVGMap($element);
+        this.leaderBoardService.saveScore(this.scoreService.score);
+        this.scoreService.resetScore();
+        this.countries = [...contries];
+      } else {
+        this.router.navigate(['main-menu']);
+      }
+
     }
   }
 

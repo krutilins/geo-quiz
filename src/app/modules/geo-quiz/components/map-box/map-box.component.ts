@@ -9,8 +9,6 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
 export class MapBoxComponent {
 
   public scale = 100;
-  public top = 0;
-  public left = 0;
 
   @Output()
   public selectCountry: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
@@ -19,12 +17,6 @@ export class MapBoxComponent {
   public zoom(ev: WheelEvent) {
     const newScale = this.scale - ev.deltaY * 0.2;
     this.scale = Math.max(newScale, 100);
-
-    const newTop = this.top - (this.top - ev.clientY) / 10;
-    this.top = newTop >= 0 ? newTop : 0;
-
-    const newLeft = this.left - (this.left - ev.clientX) / 10;
-    this.left = newLeft >= 0 ? newLeft : 0;
   }
 
   public handleMapClick($event: MouseEvent) {

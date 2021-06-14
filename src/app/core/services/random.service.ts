@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class RandomizerService {
+export class RandomService {
 
   public getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);

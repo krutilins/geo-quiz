@@ -1,6 +1,6 @@
-import { BatutaCountry } from "src/app/core/models/batuta-country.model";
+import { Country } from "src/app/core/models/country.model";
 
-export const contries: BatutaCountry[] = [
+export const contries: Country[] = [
   {
     name: "Andorra",
     code: "AD"
